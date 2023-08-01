@@ -15,9 +15,9 @@
     }
 
     .container {
-      max-width: 500px;
+      max-width: 400px;
       width: 100%;
-      padding: 30px;
+      padding: 20px;
       background-color: #fff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
@@ -25,24 +25,24 @@
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 30px;
+      font-size: 28px;
+      margin-bottom: 20px;
       color: #007BFF;
     }
 
     input[type="text"] {
-      width: 90%;
+      width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 16px;
       outline: none;
     }
 
     button {
       width: 100%;
-      padding: 14px 0;
+      padding: 12px 0;
       background-color: #007BFF;
       color: #FFF;
       border: none;
@@ -63,12 +63,6 @@
       margin: 10px 0;
       line-height: 1.6;
     }
-
-    .footer {
-      margin-top: 30px;
-      color: #777;
-      font-size: 14px;
-    }
   </style>
 </head>
 <body>
@@ -78,22 +72,62 @@
     <button onclick="search()">Search</button>
     <div id="result"></div>
   </div>
-  <div class="footer">Powered by OpenAI GPT-3</div>
 
   <script>
     // Define the JSON data with the type-name pairs
     const data = {
-      // JSON data remains the same
-      // ...
+      "Headline": "type 3",
+      "Textline": "type 0",
+      "Hyperlink": "type 23",
+      "Input line": "type 2",
+      "Text area": "type 1",
+      "Timerpicker": "type 20",
+      "Datepicker": "type 5",
+      "Switch": "type 7",
+      "Checkbox": "type 17",
+      "List": "type 9",
+      "DropDown": "type 15",
+      "Radio button": "type 27",
+      "Order Table": "type 29",
+      "SmartTable": "type 30",
+      "Dynamic Table": "type 25",
+      "Table": "type 10",
+      "Signature": "type 19",
+      "Bitmap": "type 4",
+      "Video": "type 22",
+      "File upload": "type 12",
+      "Attachment": "type 21",
+      "Rich text": "type 24",
+      "Divider": "type 8",
+      "Spacer": "type 28",
+      "Clear": "type 18",
+      "Submit": "type 6"
     };
 
-    // Search function remains the same
-    // ...
+    function search() {
+      const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+      const result = document.getElementById("result");
+      result.innerHTML = "";
 
-    // Function to handle "Enter" key press
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          const type = key.toLowerCase();
+          const name = data[key].toLowerCase();
+          if (type.includes(searchInput) || name.includes(searchInput)) {
+            result.innerHTML += `<p><strong>${key}</strong> is ${data[key]}</p>`;
+          }
+        }
+      }
+
+      if (result.innerHTML === "") {
+        result.innerHTML = "<p>No results found.</p>";
+      }
+    }
+
     function handleKeyPress(event) {
       if (event.keyCode === 13) {
         // 13 is the keycode for "Enter" key
+        event.preventDefault();
         search();
       }
     }
