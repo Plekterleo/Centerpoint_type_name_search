@@ -27,6 +27,7 @@
     h1 {
       font-size: 28px;
       margin-bottom: 20px;
+      color: #007BFF;
     }
 
     input[type="text"] {
@@ -35,6 +36,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-bottom: 10px;
+      font-size: 16px;
     }
 
     button {
@@ -45,6 +47,8 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     #result {
@@ -62,7 +66,7 @@
 <body>
   <div class="container">
     <h1>Type-Name Search</h1>
-    <input type="text" id="searchInput" placeholder="Enter type or name to search">
+    <input type="text" id="searchInput" placeholder="Enter type or name to search" onkeydown="handleKeyPress(event)">
     <button onclick="search()">Search</button>
     <div id="result"></div>
   </div>
@@ -115,6 +119,13 @@
 
       if (result.innerHTML === "") {
         result.innerHTML = "<p>No results found.</p>";
+      }
+    }
+
+    function handleKeyPress(event) {
+      if (event.keyCode === 13) {
+        // 13 is the keycode for "Enter" key
+        search();
       }
     }
   </script>
