@@ -62,23 +62,19 @@
     function search() {
       const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
       const result = document.getElementById("result");
-      
-      // Clear previous search results
       result.innerHTML = "";
 
-      // Search for type or name
-      const searchResults = Object.keys(data).filter(key => {
-        const type = key.toLowerCase();
-        const name = data[key].toLowerCase();
-        return type.includes(searchInput) || name.includes(searchInput);
-      });
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          const type = key.toLowerCase();
+          const name = data[key].toLowerCase();
+          if (type.includes(searchInput) || name.includes(searchInput)) {
+            result.innerHTML += `<p><strong>${key}</strong> is ${data[key]}</p>`;
+          }
+        }
+      }
 
-      if (searchResults.length > 0) {
-        const searchResultsHTML = searchResults.map(item => {
-          return `<p><strong>${item}</strong> is ${data[item]}</p>`;
-        }).join("");
-        result.innerHTML = searchResultsHTML;
-      } else {
+      if (result.innerHTML === "") {
         result.innerHTML = "<p>No results found.</p>";
       }
     }
