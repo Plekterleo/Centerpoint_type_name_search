@@ -60,20 +60,24 @@
     };
 
     function search() {
-      const searchInput = document.getElementById("searchInput").value.trim();
+      const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
       const result = document.getElementById("result");
       
       // Clear previous search results
       result.innerHTML = "";
 
-      // Search for the input in the JSON data
-      const type = Object.keys(data).find(key => key.toLowerCase() === searchInput.toLowerCase());
-      const name = data[searchInput];
+      // Search for type or name
+      const searchResults = Object.keys(data).filter(key => {
+        const type = key.toLowerCase();
+        const name = data[key].toLowerCase();
+        return type.includes(searchInput) || name.includes(searchInput);
+      });
 
-      if (type) {
-        result.innerHTML = `<p><strong>${type}</strong> is ${data[type]}</p>`;
-      } else if (name) {
-        result.innerHTML = `<p><strong>${name}</strong> corresponds to ${Object.keys(data).find(key => data[key] === name)}</p>`;
+      if (searchResults.length > 0) {
+        const searchResultsHTML = searchResults.map(item => {
+          return `<p><strong>${item}</strong> is ${data[item]}</p>`;
+        }).join("");
+        result.innerHTML = searchResultsHTML;
       } else {
         result.innerHTML = "<p>No results found.</p>";
       }
