@@ -86,10 +86,9 @@
 <body>
   <div class="container">
     <h1>Centerpoint Type-Name Search</h1>
-    <input type="text" id="searchInput" placeholder="Enter type or name to search" onkeydown="handleKeyPress(event)">
-    <button onclick="search()">Search</button>
-    <div id="result"></div>
+    <input type="text" id="searchInput" placeholder="Enter type or name to search" oninput="search()" onkeydown="handleKeyPress(event)">
     <button onclick="toggleNamesList()" id="namesListButton" class="hidden">Show All Names</button>
+    <div id="result"></div>
     <ul id="namesList" class="hidden names-list" onclick="handleNameClick(event)"></ul>
   </div>
 
@@ -162,10 +161,13 @@
       }
 
       const namesListButton = document.getElementById("namesListButton");
-      const result = document.getElementById("result");
-      result.innerHTML = "";
-      namesListButton.classList.add("hidden");
+      namesListButton.textContent = "Hide Names";
       namesList.classList.remove("hidden");
+    }
+
+    function hideNamesList() {
+      const namesList = document.getElementById("namesList");
+      namesList.classList.add("hidden");
     }
 
     function toggleNamesList() {
@@ -174,8 +176,8 @@
       if (namesList.classList.contains("hidden")) {
         showNamesList();
       } else {
-        namesListButton.classList.add("hidden");
-        namesList.classList.add("hidden");
+        hideNamesList();
+        namesListButton.textContent = "Show All Names";
       }
     }
 
