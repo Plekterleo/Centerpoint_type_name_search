@@ -125,6 +125,7 @@
     function handleKeyPress(event) {
       if (event.keyCode === 13) {
         // 13 is the keycode for "Enter" key
+        event.preventDefault();
         search();
       }
     }
