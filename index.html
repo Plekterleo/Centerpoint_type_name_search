@@ -79,6 +79,7 @@
 
     .names-list li {
       margin: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -88,8 +89,8 @@
     <input type="text" id="searchInput" placeholder="Enter type or name to search" onkeydown="handleKeyPress(event)">
     <button onclick="search()">Search</button>
     <div id="result"></div>
-    <button onclick="showNamesList()" id="namesListButton" class="hidden">Show All Names</button>
-    <ul id="namesList" class="hidden names-list"></ul>
+    <button onclick="toggleNamesList()" id="namesListButton" class="hidden">Show All Names</button>
+    <ul id="namesList" class="hidden names-list" onclick="handleNameClick(event)"></ul>
   </div>
 
   <script>
@@ -160,7 +161,31 @@
         }
       }
 
+      const namesListButton = document.getElementById("namesListButton");
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+      namesListButton.classList.add("hidden");
       namesList.classList.remove("hidden");
+    }
+
+    function toggleNamesList() {
+      const namesList = document.getElementById("namesList");
+      const namesListButton = document.getElementById("namesListButton");
+      if (namesList.classList.contains("hidden")) {
+        showNamesList();
+      } else {
+        namesListButton.classList.add("hidden");
+        namesList.classList.add("hidden");
+      }
+    }
+
+    function handleNameClick(event) {
+      if (event.target.tagName === "LI") {
+        const name = event.target.textContent.trim();
+        const searchInput = document.getElementById("searchInput");
+        searchInput.value = name;
+        search();
+      }
     }
 
     function handleKeyPress(event) {
