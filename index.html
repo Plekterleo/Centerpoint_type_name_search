@@ -112,7 +112,8 @@
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
           const type = data[key].toLowerCase();
-          if (type.includes(searchInput)) {
+          const name = key.toLowerCase();
+          if (type.includes(searchInput) || name.includes(searchInput)) {
             result.innerHTML += `<p><strong>${key}</strong> is ${data[key]}</p>`;
           }
         }
