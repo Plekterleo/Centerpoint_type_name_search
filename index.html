@@ -7,11 +7,21 @@
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      text-align: center;
-      margin: 50px auto;
-      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
       padding: 20px;
+      background-color: #fff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
     }
 
     h1 {
@@ -20,14 +30,16 @@
     }
 
     input[type="text"] {
-      width: 80%;
+      width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      margin-bottom: 10px;
     }
 
     button {
-      padding: 12px 20px;
+      width: 100%;
+      padding: 12px 0;
       background-color: #007BFF;
       color: #FFF;
       border: none;
@@ -43,14 +55,17 @@
     #result p {
       font-size: 16px;
       margin: 10px 0;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
-  <h1>Type-Name Search</h1>
-  <input type="text" id="searchInput" placeholder="Enter type or name to search">
-  <button onclick="search()">Search</button>
-  <div id="result"></div>
+  <div class="container">
+    <h1>Type-Name Search</h1>
+    <input type="text" id="searchInput" placeholder="Enter type or name to search">
+    <button onclick="search()">Search</button>
+    <div id="result"></div>
+  </div>
 
   <script>
     // Define the JSON data with the type-name pairs
