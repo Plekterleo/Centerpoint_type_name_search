@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Type-Name Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007BFF;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Type-Name Search</h1>
+  <input type="text" id="searchInput" placeholder="Enter type or name to search">
+  <button onclick="search()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    // Define the JSON data with the type-name pairs
+    const data = {
+      "Headline": "type 3",
+      "Textline": "type 0",
+      "Hyperlink": "type 23",
+      "Input line": "type 2",
+      "Text area": "type 1",
+      "Timerpicker": "type 20",
+      "Datepicker": "type 5",
+      "Switch": "type 7",
+      "Checkbox": "type 17",
+      "List": "type 9",
+      "DropDown": "type 15",
+      "Radio button": "type 27",
+      "Order Table": "type 29",
+      "SmartTable": "type 30",
+      "Dynamic Table": "type 25",
+      "Table": "type 10",
+      "Signature": "type 19",
+      "Bitmap": "type 4",
+      "Video": "type 22",
+      "File upload": "type 12",
+      "Attachment": "type 21",
+      "Rich text": "type 24",
+      "Divider": "type 8",
+      "Spacer": "type 28",
+      "Clear": "type 18",
+      "Submit": "type 6"
+    };
+
+    function search() {
+      const searchInput = document.getElementById("searchInput").value.trim();
+      const result = document.getElementById("result");
+      
+      // Clear previous search results
+      result.innerHTML = "";
+
+      // Search for the input in the JSON data
+      const type = Object.keys(data).find(key => key.toLowerCase() === searchInput.toLowerCase());
+      const name = data[searchInput];
+
+      if (type) {
+        result.innerHTML = `<p><strong>${type}</strong> is ${data[type]}</p>`;
+      } else if (name) {
+        result.innerHTML = `<p><strong>${name}</strong> corresponds to ${Object.keys(data).find(key => data[key] === name)}</p>`;
+      } else {
+        result.innerHTML = "<p>No results found.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
